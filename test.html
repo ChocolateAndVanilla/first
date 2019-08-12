@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			* {
+			  margin: 0;
+			  padding: 0;
+			}
+		
+			ul,
+			li {
+			  list-style: none;
+			}
+		  </style>
+	</head>
+	<body>
+		<input type="text" name="keyword">
+		<button id="btn">serch</button>
+		
+		<ul id="ullist">
+		
+		</ul>
+		<script type="text/javascript">
+			// const obj = {
+			// 	name:'decade',
+			// 	age:31
+			// }
+			//解构方式
+			// let {name,age} = obj;
+			// console.log(name)
+			
+			// let {name:newName} = obj;
+			// console.log(newName)
+			
+			// var result = {
+			// 	data:{
+			// 		status:0,
+			// 		message:[1,2,3,4]
+			// 	}
+				
+			// }
+			
+			// var {data:{message,status}} = result;
+			// console.log(status,message)
+
+			//es6参数默认值
+			// function show(...reset){
+			// 	let sum = 0
+
+			// 	reset.forEach(function(item,index){
+			// 		sum += item
+			// 	})
+			// 	console.log(sum)
+			// }
+
+			// let arr = [1,2,3,4];
+			// show(...arr)
+			
+			//1.0 模拟后台数据
+			let arr = [
+				{
+					id:0,
+					name:'宝马'
+				},
+				{
+					id:1,
+					name:'宝骏'
+				},
+				{
+					id:2,
+					name:'路虎'
+				}
+			]
+
+			//2.0 遍历拼接数据
+			let html = ''
+			arr.forEach(function(item){
+				html += `
+					<li>
+						<span>${item.id}</span>
+						<span>${item.name}</span>
+					</li>
+				`
+			})
+			document.querySelector('#ullist').innerHTML = html;
+
+			//3.0 过滤数据
+			function search(keyword){
+				return arr.filter(function(item){
+					if(item.name.includes(keyword)) return item
+				})
+			}
+
+			//4.0 输入关键词搜索相应的内容
+			document.querySelector('#btn').onclick = function(){
+				let keyword = document.querySelector('[name="keyword"]').value
+				let newArr = search(keyword)
+				let html = ''
+				newArr.forEach(function(item){
+					html += `
+						<li>
+							<span>${item.id}</span>
+							<span>${item.name}</span>
+						</li>
+					`
+				})
+				document.querySelector('#ullist').innerHTML = html
+			}
+		</script>
+	</body>
+</html>
